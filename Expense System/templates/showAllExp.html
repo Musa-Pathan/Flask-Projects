@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show All Transaction</title>
+    <style>
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: #2c3e50;
+      padding: 15px 30px;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: #ecf0f1;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    /*  */
+
+    /* edit and delete button */
+    button{
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      background: #2980b9;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+     button:hover {
+      background: #1c5d85;
+    }
+    /* Transactions Table */
+    .transactions {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .transactions h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background: #2c3e50;
+      color: #fff;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+    tbody tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    .text-green { color: #27ae60; font-weight: bold; }
+    .text-red { color: #c0392b; font-weight: bold; }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      background: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+    </style>
+</head>
+<body>
+    
+  <!-- Navbar -->
+  <nav>Expense Tracker</nav>
+  <marquee behavior="alternate" direction="left"><h1>WEL - COME {{session["username"]}}</h1></marquee>
+  <!-- Hero -->
+  <header>
+    
+    <h1>Manage Your Expenses</h1>
+    <p>Track income, monitor spending, and control your budget with ease.</p>
+    <a href="/addExpense"><button>Add Transaction</button></a>
+    <a href="/homepage"><button>Home</button></a>
+    
+  </header>
+  
+  
+  <!-- Transactions Table -->
+  <section class="transactions">
+    <h2>Recent Transactions</h2>
+    <table border="1" cellpadding="10">
+  <tr>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Note</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th>Transaction Type</th>
+    <th>Actions</th>
+  </tr>
+  {% for exp in expenses %}
+  <tr>
+    <td>{{ exp[2] }}</td>
+    <td>{{ exp[3] }}</td>
+    <td>{{ exp[4] }}</td>
+    <td>{{ exp[5] }}</td>
+    <td>{{ exp[6] }}</td>
+    <td>{{ exp[8] }}</td>
+    <td>
+      <a href="/editExpense/{{ exp[0] }}"><button>Edit</button></a> |
+      <a href="/deleteExpense/{{ exp[0] }}" onclick="return confirm('Delete this record?')"><button>Delete</button></a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Expense Tracker | All Rights Reserved by Pathan MH
+  
+  </footer>
+</body>
+</html>

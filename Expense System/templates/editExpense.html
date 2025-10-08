@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Expense</title>
+  <style>
+    /* ===== Page Layout ===== */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f4f7fc, #e1ecf4);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* ===== Container ===== */
+    .container {
+      background-color: #fff;
+      width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    /* ===== Form Fields ===== */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #2a9df4;
+      box-shadow: 0 0 5px rgba(42, 157, 244, 0.5);
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-update {
+      background-color: #2a9df4;
+    }
+    .btn-update:hover {
+      background-color: #0077cc;
+    }
+
+    .btn-delete {
+      background-color: #e74c3c;
+    }
+    .btn-delete:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-cancel {
+      background-color: #7f8c8d;
+    }
+    .btn-cancel:hover {
+      background-color: #626b6b;
+    }
+
+    /* ===== Back Link ===== */
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #2a9df4;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Edit Expense</h2>
+    <form method="POST" action="/editExpense/{{ expense[0] }}">
+      <div class="form-group">
+        <label for="expense_date">Date</label>
+        <input type="date" name="expense_date" value="{{expense[2]}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="expense_type">Type</label>
+        <input type="text" name="expense_type" value="{{ expense[3] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note</label>
+        <textarea name="note" rows="3">{{ expense[4] }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="expense_amt">Amount</label>
+        <input type="number" name="expense_amt" value="{{ expense[5] }}" required>
+      </div>
+
+      <button type="submit" class="btn btn-update">💾 Update Expense</button>
+    </form>
+
+    <form method="POST" action="/deleteExpense/{{ expense[0] }}">
+      <button type="submit" class="btn btn-delete">🗑 Delete Expense</button>
+    </form>
+
+    <a href="/showAllExp" class="btn btn-cancel" style="display:block;text-align:center;text-decoration:none;">❌ Cancel</a>
+  </div>
+</body>
+</html>

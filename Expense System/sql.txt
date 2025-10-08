@@ -1,0 +1,20 @@
+ create database Expense;
+
+CREATE TABLE userData (
+    ->     uid INT PRIMARY KEY AUTO_INCREMENT,
+    ->     uname VARCHAR(50),
+    ->     password VARCHAR(20)
+    -> );
+
+ALTER TABLE userData MODIFY COLUMN password VARCHAR(20) NOT NULL;
+
+ CREATE TABLE user_expense (
+    ->     expense_id primary key 
+    ->     user_id INT,                               -- foreign key column
+    ->     expense_date DATE,
+    ->     expense_type VARCHAR(30),
+    ->     note VARCHAR(50),
+    ->     expense_amt DECIMAL(7,2),                  -- better than FLOAT for money
+    ->     FOREIGN KEY (user_id) REFERENCES userdata(uid)
+    ->     transaction_type enum['income','expense']
+    -> );

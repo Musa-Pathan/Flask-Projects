@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: #2c3e50;
+      padding: 15px 30px;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: #ecf0f1;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    header button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      background: #2980b9;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    header button:hover {
+      background: #1c5d85;
+    }
+
+    /* Summary Section */
+    .summary {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      max-width: 1100px;
+      gap: 20px;
+    }
+    .card {
+      flex: 1;
+      min-width: 250px;
+      padding: 25px;
+      border-radius: 12px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .income { background: #27ae60; }
+    .expense { background: #c0392b; }
+    .balance { background: #2980b9; }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.8rem;
+    }
+
+    /* Transactions Table */
+    .transactions {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .transactions h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background: #2c3e50;
+      color: #fff;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+    tbody tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    .text-green { color: #27ae60; font-weight: bold; }
+    .text-red { color: #c0392b; font-weight: bold; }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      background: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav>Expense Tracker</nav>
+  <marquee behavior="alternate" direction="left"><h1>WEL - COME {{session["username"]}}</h1></marquee>
+  <!-- Hero -->
+  <header>
+    
+    <h1>Manage Your Expenses</h1>
+    <p>Track income, monitor spending, and control your budget with ease.</p>
+    <a href="/addExpense"><button>Add Transaction</button></a>
+    <a href="/showAllExp"><button>Show All Transaction</button></a>
+    <a href="/logout"><button>Logout</button></a>
+    
+  </header>
+  
+
+  <!-- Summary Cards -->
+  <section class="summary">
+    <div class="card income">
+      <h4>Total Income</h4>
+      <h3>{{total_income}}</h3>
+    </div>
+    <div class="card expense">
+      <h4>Total Expenses</h4>
+      <h3>{{total_exp}}</h3>
+    </div>
+    <div class="card balance">
+      <h4>Balance</h4>
+      <h3>{{total_amt}}</h3>
+      
+    </div>
+    
+  </section>
+
+  <section class="transactions">
+  <h2>Recent Transactions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in transactions %}
+      <tr>
+        <td>{{ t.expense_date }}</td>
+        <td>{{ t.expense_type }}</td>
+        <td class="{{ 'text-green' if t.transaction_type=='income' else 'text-red' }}">
+          {% if t.transaction_type=='income' %}+₹{{ t.income }}{% else %}-₹{{ t.expense_amt }}{% endif %}
+        </td>
+        <td>{{ t.balance }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Expense Tracker | All Rights Reserved by Pathan MH
+  
+  </footer>
+
+</body>
+</html>
